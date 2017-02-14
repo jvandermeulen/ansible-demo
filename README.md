@@ -1,4 +1,26 @@
-# ansible-demo
+ansible-demo
+============
+
 Ansible (Tower) demo for Conclusion Xforce 
 
-February/March 2017
+Requirements
+------------
+
+none
+
+Example Playbook
+----------------
+
+    - hosts: servers
+      roles:
+         - { role: jvandermeulen.ansible-demo }
+
+License
+-------
+
+BSD
+
+Author Information
+------------------
+
+See http://xforce.conclusion.nl/
