@@ -1,0 +1,9 @@
+---
+- name: show uptime pretty
+  command: uptime -p
+  register: UptimeResult
+
+- name: show debug output from previous uptime command
+  debug: 
+    var: UptimeResult
+        
