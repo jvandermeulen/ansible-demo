@@ -1,0 +1,14 @@
+---
+# tasks file for info
+#
+- name: hostname
+  command: uptime
+
+- name: update
+  shell: /usr/bin/uptime
+  register: result
+
+- name: show uptime result
+  debug:
+    var: result
+    verbosity: 2

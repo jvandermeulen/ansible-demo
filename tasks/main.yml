@@ -1,2 +1,16 @@
 ---
 # tasks file for ansible-demo
+#
+- name: show uptime using shell
+  shell: /usr/bin/uptime
+  register: result
+
+- name: show uptime using command (pretty)
+  command: uptime -p
+  register: result
+
+- name: show uptime result
+  debug:
+    var: result
+    #verbosity: 1
+    #verbosity: 2

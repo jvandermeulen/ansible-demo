@@ -1,0 +1,12 @@
+---
+- hosts: all
+  #remote_user: root
+  become: true
+#  tasks:
+#    - name: show uptime
+#      command: uptime -p
+  tasks:
+    - include: ./tasks/main.yml
+
+#  roles:
+#    - info

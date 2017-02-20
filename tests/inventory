@@ -1,1 +1,2 @@
-localhost
+localhost ansible_connection=local
+c7-t01 ansible_host=192.168.122.61
