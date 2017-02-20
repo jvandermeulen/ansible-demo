@@ -1,5 +1,5 @@
 ---
-- hosts: c7-t01
+- hosts: Nagios-clients
   #remote_user: root
   become: true
   gather_facts: false
