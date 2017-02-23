@@ -1,4 +1,6 @@
 ---
 # vars file for ansible-demo
 # edited from PyCharm
-ncpatoken=demo-token
+ncpa_token: demo-token
+ncpa_port: 5693
+
