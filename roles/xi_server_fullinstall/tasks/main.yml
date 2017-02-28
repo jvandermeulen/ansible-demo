@@ -1,0 +1,24 @@
+---
+# tasks file for xi_server_fullinstall
+
+- name: Get software
+  get_url:
+    dest: /tmp/xi-latest.tar.gz
+    url: https://assets.nagios.com/downloads/nagiosxi/xi-latest.tar.gz
+    force: no
+
+- name: Unzip XI tarball
+  unarchive:
+    src: /tmp/xi-latest.tar.gz
+    dest: /tmp
+    remote_src: True
+
+- name: Run fullinstall script
+  command: ./fullinstall -n
+  args:
+    chdir: /tmp/nagiosxi
+  register: fullinstall_out
+
+- name: Display results from fullinstall script
+  debug:
+    var: fullinstall_out
