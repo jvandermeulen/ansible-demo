@@ -1,9 +1,12 @@
 localhost ansible_connection=local
+
 [nagios-server]
 monitor ansible_host=192.168.122.5
+
 [nagios-clients]
 c7-t01 ansible_host=192.168.122.61
 c7-t02 ansible_host=192.168.122.216
+
 [windows]
 win2008 ansible_host=192.168.122.90 ansible_connection=winrm
 win2012-01 ansible_host=192.168.122.49 ansible_connection=winrm
