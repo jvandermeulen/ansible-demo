@@ -1,0 +1,11 @@
+---
+- hosts: nagios-server
+  #remote_user: root
+  become: true
+  #gather_facts: false
+#  tasks:
+#    - include: ./tasks/main.yml
+
+  roles:
+    - xi_server_mariadb
+    - xi_server_fullinstall
