@@ -3,6 +3,11 @@
 
 - name: Install Maria DB Server group
   yum: name="@MariaDB Database Server" state=installed
+  register: groupinstall_out
+
+- name: List installed packages from previous group-install
+  debug:
+    var: groupinstall_out.results
 
 - name: Configure SELinux to start mysql on any port
   seboolean: name=mysql_connect_any state=true persistent=yes
@@ -12,11 +17,11 @@
   notify:
   - restart mariadb
 
-- name: Create MariaDB log file
-  file: path=/var/log/mysqld.log state=touch owner=mysql group=mysql mode=0775
+#- name: Create MariaDB log file
+#  file: path=/var/log/mysqld.log state=touch owner=mysql group=mysql mode=0775
 
-- name: Create MariaDB PID directory
-  file: path=/var/run/mysqld state=directory owner=mysql group=mysql mode=0775
+#- name: Create MariaDB PID directory
+#  file: path=/var/run/mysqld state=directory owner=mysql group=mysql mode=0775
 
 - name: Start MariaDB Service
   service: name=mariadb state=started enabled=yes
