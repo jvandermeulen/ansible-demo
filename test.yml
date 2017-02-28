@@ -5,7 +5,7 @@
   gather_facts: false
 #  tasks:
 #    - name: show uptime
-#      command: uptime -p
+#      command: "uptime -p"
   tasks:
     - include: ./tasks/main.yml
 
