@@ -1,0 +1,5 @@
+---
+# handlers file for ncpa
+# - name: restart ncpa
+#   service: name=ncpa state=restarted
+#

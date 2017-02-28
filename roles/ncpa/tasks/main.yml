@@ -1,0 +1,44 @@
+---
+- name: install ncpa
+  yum:
+    name: ncpa
+    state: latest
+    enablerepo: nagios-base
+  notify:
+  - restart ncpa
+
+- name:  ncpa listener service should be enabled
+  service:
+    name: ncpa_listener
+    state: started
+    enabled: true
+
+# de lineinfile module vervangt helaas CRLF door CRLF,LF
+#- name:  change token (community string)
+#  lineinfile:
+#    dest: /usr/local/ncpa/etc/ncpa.cfg
+#    regexp: "^community_string ="
+#    line: "community_string = MY7tdi#7"
+
+- name:  change token (community string)
+  replace:
+    dest: /usr/local/ncpa/etc/ncpa.cfg
+    regexp: '^community_string =.*$'
+    replace: 'community_string = MY7tdi#7'
+  notify:
+  - restart ncpa
+
+
+- name: copy plugin hostname_selinux.sh
+  copy:
+    src: 'hostname_selinux.sh'
+    dest: '/usr/local/ncpa/plugins/hostname_selinux.sh'
+    owner: root
+    mode: '750'
+
+- name: copy plugin service_active.sh
+  copy:
+    src: 'service_active.sh'
+    dest: '/usr/local/ncpa/plugins/service_active.sh'
+    owner: root
+    mode: '750'
