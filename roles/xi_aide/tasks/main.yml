@@ -1,0 +1,31 @@
+---
+# tasks file for xi_aide
+- name: install aide
+  yum:
+    name: aide
+    state: latest
+
+
+- name:  Customze aide.conf for Nagios XI
+  blockinfile:
+    backup: yes
+    path: /etc/aide.conf
+    marker: #-- {mark} ANSIBLE MANAGED BLOCK -->"
+    insertafter: "These are too volatile"
+    content: |
+     # Conclusion Xforce: additional settings for Nagios
+     # !/usr/local/ncpa/var
+     # !/usr/local/nagios/etc
+     # !/usr/local/databases
+     # !/usr/local/nagios/var
+     # !/usr/local/nagios/share/perfdata
+     # !/usr/local/mrtg
+     # !/usr/local/nagiosxi/var
+     # !/usr/local/nagiosxi/scripts
+     # !/usr/local/nagiosxi/nom
+     # !/var/log/httpd
+     # !/var/log/audit
+     # !/var/log/rhsm
+     #
+     #
+
