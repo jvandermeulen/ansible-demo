@@ -1,2 +1,3 @@
 ---
 # vars file for mariadb
+mysql_port: 3306
