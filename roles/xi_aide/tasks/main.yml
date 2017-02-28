@@ -8,9 +8,9 @@
 
 - name:  Customze aide.conf for Nagios XI
   blockinfile:
+    dest: /etc/aide.conf
     backup: yes
-    path: /etc/aide.conf
-    marker: #-- {mark} ANSIBLE MANAGED BLOCK -->"
+    marker: "#-- {mark} ANSIBLE MANAGED BLOCK -->"
     insertafter: "These are too volatile"
     content: |
      # Conclusion Xforce: additional settings for Nagios
@@ -26,6 +26,4 @@
      # !/var/log/httpd
      # !/var/log/audit
      # !/var/log/rhsm
-     #
-     #
 

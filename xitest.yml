@@ -8,4 +8,5 @@
 
   roles:
     - xi_server_mariadb
-    - xi_server_fullinstall
+    #- xi_server_fullinstall
+    - xi_aide
