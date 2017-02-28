@@ -1,5 +1,5 @@
 ---
-- hosts: Nagios-clients
+- hosts: nagios-clients
   #remote_user: root
   become: true
   gather_facts: false
