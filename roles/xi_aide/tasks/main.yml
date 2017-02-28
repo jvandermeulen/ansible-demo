@@ -5,7 +5,6 @@
     name: aide
     state: latest
 
-
 - name: Customze aide.conf for Nagios XI
   blockinfile:
     dest: /etc/aide.conf
@@ -27,6 +26,16 @@
      !/var/log/audit
      !/var/log/rhsm
 
+- name: Customze aide.conf default output
+  lineinfile:
+    dest: /etc/aide.conf
+    backup: yes
+    regexp: 'database_out=file:@@{DBDIR}/aide.db.new.gz'
+    line: 'database_out=file:@@{DBDIR}/aide.db.gz'
+    backrefs: yes
+
 - name: Schedule aide init check
   shell: 'nohup aide --init &'
-
+  args: 
+    chdir: /tmp
+   
