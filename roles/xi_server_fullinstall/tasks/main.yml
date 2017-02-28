@@ -22,3 +22,4 @@
 - name: Display results from fullinstall script
   debug:
     var: fullinstall_out
+    verbosity: 1
