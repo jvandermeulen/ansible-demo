@@ -1,11 +1,11 @@
 ---
 # tasks file for xi_aide
-- name: install aide
+- name: Install aide
   yum:
     name: aide
     state: latest
 
-- name: Customze aide.conf for Nagios XI
+- name: Customize aide.conf for Nagios XI
   blockinfile:
     dest: /etc/aide.conf
     backup: yes
@@ -26,7 +26,7 @@
      !/var/log/audit
      !/var/log/rhsm
 
-- name: Customze aide.conf default output
+- name: Customize aide.conf default output
   lineinfile:
     dest: /etc/aide.conf
     backup: yes
