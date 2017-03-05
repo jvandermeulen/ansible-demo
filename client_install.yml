@@ -1,0 +1,10 @@
+---
+- hosts: nagios-clients
+  #remote_user: root
+  become: true
+  #gather_facts: false
+#  tasks:
+#    - include: ./tasks/main.yml
+
+  roles:
+    - ncpa
