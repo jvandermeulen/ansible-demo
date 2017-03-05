@@ -7,4 +7,5 @@
 #    - include: ./tasks/main.yml
 
   roles:
+    - nagiosrepo
     - ncpa
