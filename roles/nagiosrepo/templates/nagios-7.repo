@@ -1,0 +1,6 @@
+[nagios-base]
+name=Nagios
+baseurl=http://repo.nagios.com/nagios/7/
+enabled=0
+gpgcheck=1
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-NAGIOS

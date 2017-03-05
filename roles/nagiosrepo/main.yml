@@ -1,0 +1,5 @@
+- name: Install NCPA 2.x stable
+  yum:
+    name: http://repo.nagios.com/nagios/7/nagios-repo-7-2.el7.noarch.rpm
+    state: present
+  
