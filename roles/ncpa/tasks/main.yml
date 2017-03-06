@@ -24,7 +24,7 @@
   replace:
     dest: /usr/local/ncpa/etc/ncpa.cfg
     regexp: '^community_string =.*$'
-    replace: 'community_string = MY7tdi#7'
+    replace: 'community_string = {{ ncpa_token }}'
   notify:
   - restart ncpa
 
