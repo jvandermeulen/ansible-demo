@@ -13,6 +13,11 @@
     state: started
     enabled: true
 
+- name: open firewall for ncpa
+  firewalld:
+    port: {{ ncpa_port }}/tcp
+    state: enabled
+
 # de lineinfile module vervangt helaas CRLF door CRLF,LF
 #- name:  change token (community string)
 #  lineinfile:
