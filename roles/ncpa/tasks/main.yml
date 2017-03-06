@@ -17,6 +17,8 @@
   firewalld:
     port: "{{ ncpa_port }}/tcp"
     state: enabled
+    permanent: true
+    immediate: true
 
 # de lineinfile module vervangt helaas CRLF door CRLF,LF
 #- name:  change token (community string)
