@@ -30,6 +30,7 @@
 - name:  change token (community string)
   replace:
     dest: /usr/local/ncpa/etc/ncpa.cfg
+    backup: true
     regexp: '^community_string =.*$'
     replace: 'community_string = {{ ncpa_token }}'
   notify:
