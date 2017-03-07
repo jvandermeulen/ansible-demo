@@ -1,5 +1,21 @@
 ---
-- name: install repo
+- name: Install repo file and package
   yum:
-    name: http://repo.nagios.com/nagios/7/nagios-repo-7-2.el7.noarch.rpm
+    name: "{{ item }}"
     state: present
+  with_items:
+    - http://repo.nagios.com/nagios/7/nagios-repo-7-2.el7.noarch.rpm
+    - yum-utils
+
+- name: disable one specific repo
+  command: yum-config-manager --disable nagiosxi-deps
+
+#- name: Repo for Nagios
+#  copy:
+#    src: 'nagios-7.repo'
+#    dest: '/etc/yum.repos.d/'
+#    owner: root
+#    mode: '644'
+
+
+  

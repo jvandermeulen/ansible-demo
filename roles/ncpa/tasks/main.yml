@@ -1,5 +1,16 @@
 ---
-- name: install ncpa
+- name: check for old ncpa installation
+  command: "rpm -q ncpa-1.8*"
+  register: ncpa_old_version_exists
+  changed_when: "ncpa_old_version_exists.rc == 0"
+
+- name: remove old ncpa first
+  yum
+    name: ncpa
+    state: absent
+  when: "ncpa_old_version_exists.rc == 0"
+
+- name: install ncpa client latest
   yum:
     name: ncpa
     state: latest

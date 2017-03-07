@@ -3,3 +3,6 @@
  - name: restart ncpa
    service: name=ncpa_listener state=restarted
 
+ - name: remove ncpa
+   yum: name=ncpa state=absent
+
