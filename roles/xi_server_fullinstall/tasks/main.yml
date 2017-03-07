@@ -23,3 +23,12 @@
   debug:
     var: fullinstall_out
     verbosity: 1
+
+- name: Jinja2 template for nagiosadmin setup
+  template:
+    src: xi_setup_nagiosadmin.bash.j2
+    dest: /usr/local/bin/
+    owner: root
+    group: nagios
+    mode: '0600'
+ 
