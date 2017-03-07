@@ -73,16 +73,13 @@
   - restart ncpa
 
 
-- name: copy plugin hostname_selinux.sh
+- name: copy several ncpa plugins
   copy:
-    src: 'hostname_selinux.sh'
-    dest: '/usr/local/ncpa/plugins/hostname_selinux.sh'
+    src: "{{ item }}"
+    dest: "/usr/local/ncpa/plugins/{{ item }}"
     owner: nagios
     mode: '750'
+  with_items:
+    - hostname_selinux.sh
+    - service_active.sh
 
-- name: copy plugin service_active.sh
-  copy:
-    src: 'service_active.sh'
-    dest: '/usr/local/ncpa/plugins/service_active.sh'
-    owner: nagios
-    mode: '750'
