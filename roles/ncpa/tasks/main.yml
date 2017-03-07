@@ -1,14 +1,36 @@
 ---
+# This role depends on tasks from nagiosrepo role
+#
 - name: check for old ncpa installation
   command: "rpm -q ncpa-1.8*"
   register: ncpa_old_version_exists
   changed_when: "ncpa_old_version_exists.rc == 0"
+  ignore_errors: true
 
-- name: remove old ncpa first
-  yum
+- name:  old ncpa services should be stopped
+  service:
+    name: "{{ item }}"
+    state: stopped
+    enabled: false
+  with_items:
+    - ncpa_passive
+    - ncpa_listener
+  when: "ncpa_old_version_exists.changed"
+
+- name: kill old processes because of ncpa 1.8 bug
+  command: "killall -v {{ item }}"
+  with_items:
+    - ncpa_posix_passive
+    - ncpa_posix_listener
+  when: "ncpa_old_version_exists.changed"
+  ignore_errors: true
+
+- name: remove old ncpa 
+  yum:
     name: ncpa
     state: absent
-  when: "ncpa_old_version_exists.rc == 0"
+  when: "ncpa_old_version_exists.changed"
+
 
 - name: install ncpa client latest
   yum:
@@ -18,11 +40,14 @@
   notify:
   - restart ncpa
 
-- name:  ncpa listener service should be enabled
+- name:  ncpa services should be enabled
   service:
-    name: ncpa_listener
+    name: "{{ item }}"
     state: started
     enabled: true
+  with_items:
+    - ncpa_passive
+    - ncpa_listener
 
 - name: open firewall for ncpa
   firewalld:
@@ -52,12 +77,12 @@
   copy:
     src: 'hostname_selinux.sh'
     dest: '/usr/local/ncpa/plugins/hostname_selinux.sh'
-    owner: root
+    owner: nagios
     mode: '750'
 
 - name: copy plugin service_active.sh
   copy:
     src: 'service_active.sh'
     dest: '/usr/local/ncpa/plugins/service_active.sh'
-    owner: root
+    owner: nagios
     mode: '750'

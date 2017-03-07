@@ -6,6 +6,7 @@
   with_items:
     - http://repo.nagios.com/nagios/7/nagios-repo-7-2.el7.noarch.rpm
     - yum-utils
+    - psmisc
 
 - name: disable one specific repo
   command: yum-config-manager --disable nagiosxi-deps
