@@ -1,2 +1,5 @@
 ---
 # vars file for xi_server_fullinstall
+xi_connect_address: localhost
+xi_admin_email: jvandermeulen@xforce.local
+xi_admin_password: ansible.
