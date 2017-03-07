@@ -1,8 +1,9 @@
 ---
 # handlers file for ncpa
  - name: restart ncpa
-   service: name=ncpa_listener state=restarted
-
- - name: remove ncpa
-   yum: name=ncpa state=absent
-
+   service: 
+     name: "{{ item }}"
+     state: restarted
+   with_items:
+     - ncpa_listener
+     - ncpa_passive
