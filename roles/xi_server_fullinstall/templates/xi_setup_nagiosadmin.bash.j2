@@ -1,0 +1,31 @@
+#!/bin/bash -e
+# This script will set up a freshly installed nagiosxi with some default values, and then check the output for some keywords to ensure that it's working properly. 
+# 2017/03/07 Conclusion Xforce would like to thank Nagios Enterprises for sharing the rough ideas/basics of automating what normally is presented by a WebGUI install.php form.
+
+# Jinja2 values
+ip="{{ xi_connect_address }}"
+admin_email="{{ xi_admin_email }}"
+admin_password="{{ xi_admin_password }}"
+
+# other values
+cookie="xi_setup_nagiosadmin.txt"
+url="http://$ip/nagiosxi"
+admin_name="nagiosadmin"
+admin_username="nagiosadmin"
+success_string="You have successfully installed Nagios XI."
+output_file=$ip.install.output
+
+echo "Setting up XI through install.php"
+
+# get the nsp we need for this session
+nsp=`curl --cookie $cookie --cookie-jar $cookie -sS "http://$ip/nagiosxi/install.php" | grep "<input type='hidden' name='nsp'" | sed "s/.*value='//;s/'>//"`
+
+
+# send the install parameters and get the output
+curl --cookie $cookie --cookie-jar $cookie --data "install=1&nsp=$nsp&url=$url&admin_name=$admin_name&admin_email=$admin_email&admin_username=$admin_username&admin_password=$admin_password" http://$ip/nagiosxi/install.php >$output_file 2>&1
+
+# check the output for the presence of success_string and fail if not found
+if ! grep --quiet "$success_string" $output_file; then
+	echo "The XI user interface is not reporting that it has been successfully installed on $ip" >&2
+	exit 1
+fi
