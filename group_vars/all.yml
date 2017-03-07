@@ -4,5 +4,4 @@ ncpa_token: demo-token
 ncpa_port: 5693
 #
 xi_connect_address: localhost
-xi_admin_email: jvandermeulen@xforce.local
-xi_admin_password: ansible.
+
