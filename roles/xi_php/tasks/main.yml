@@ -1,0 +1,26 @@
+---
+# tasks file for xi_php
+#
+- name: Install Apache and PHP
+  yum: 
+    name: "{{ item }}" 
+    state: latest
+  with_items:
+    - httpd
+    - php
+    - php-devel
+    - php-dom
+    - php-mbstring
+    - php-mysql
+    - php-pgsql
+    - php-gd
+
+- name: Config timezone
+  ini_file:
+    dest: /etc/php.ini 
+    section: Date 
+    option: date.timezone
+    value: "{{ time_zone }}"
+    backup: yes
+  notify:
+  - Restart Apache

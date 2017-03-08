@@ -1,0 +1,20 @@
+---
+# Playbook that configures Nagios XI server for centralized monitoring
+#
+- hosts: nagios-server
+  become: true
+  #gather_facts: false
+
+  roles:
+    - xi_php
+    - xi_server_mariadb
+    - xi_server_fullinstall
+    - xi_aide
+
+#  tasks:
+#    - include: ./tasks/main.yml
+#
+#  reminder:
+#
+#    MariaDB [(none)]> insert into nagiosxi.xi_options (name,value) VALUES('inbound_nrdp_tokens','Herculespl80');
+#    Query OK, 1 row affected (0.00 sec)
