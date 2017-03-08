@@ -35,3 +35,4 @@
 - name: Run nagiosadmin setup # this automates what install.php normally does. Thanks Matthew Capra!
   command: /usr/local/bin/xi_setup_nagiosadmin.bash
   register: setupnagiosadmin_out
+  creates: "{{ output_file }}"

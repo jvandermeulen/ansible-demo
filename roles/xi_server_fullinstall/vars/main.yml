@@ -4,3 +4,4 @@ xi_connect_address: localhost
 xi_admin_email: jvandermeulen@xforce.local
 xi_admin_description: "Nagiosadmin created by Ansible"
 xi_admin_password: ansible.
+output_file: "/tmp/xi_setup_nagiosadmin.install.output"
