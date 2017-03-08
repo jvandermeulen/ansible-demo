@@ -5,12 +5,13 @@
 # Jinja2 values
 ip="{{ xi_connect_address }}"
 admin_email="{{ xi_admin_email }}"
+admin_name="{{ xi_admin_description }}"
 admin_password="{{ xi_admin_password }}"
 
 # other values
 cookie="xi_setup_nagiosadmin.txt"
 url="http://$ip/nagiosxi"
-admin_name="nagiosadmin"
+#admin_name="nagiosadmin"
 admin_username="nagiosadmin"
 success_string="You have successfully installed Nagios XI."
 output_file=$ip.install.output

@@ -27,8 +27,11 @@
 - name: Jinja2 template for nagiosadmin setup
   template:
     src: xi_setup_nagiosadmin.bash.j2
-    dest: /usr/local/bin/
+    dest: /usr/local/bin/xi_setup_nagiosadmin.bash
     owner: root
     group: nagios
-    mode: '0600'
+    mode: '0700'
  
+- name: Run nagiosadmin setup # this automates what install.php normally does. Thanks Matthew Capra!
+  command: /usr/local/bin/xi_setup_nagiosadmin.bash
+  register: setupnagiosadmin_out
