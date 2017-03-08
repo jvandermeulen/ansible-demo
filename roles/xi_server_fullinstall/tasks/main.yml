@@ -32,7 +32,8 @@
     group: nagios
     mode: '0700'
  
-- name: Run nagiosadmin setup # this automates what install.php normally does. Thanks Matthew Capra!
+# this step automates what install.php normally does by presenting a PHP form. Thanks Matthew Capra!
+- name: Run nagiosadmin setup 
   command: /usr/local/bin/xi_setup_nagiosadmin.bash
   register: setupnagiosadmin_out
   creates: "{{ output_file }}"
