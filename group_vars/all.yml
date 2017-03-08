@@ -3,5 +3,4 @@
 ncpa_token: demo-token
 ncpa_port: 5693
 #
-xi_connect_address: localhost
-
+time_zone: "Europe/Amsterdam"
