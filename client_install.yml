@@ -1,4 +1,5 @@
 ---
+# Playbook that configures Nagios clients (either update or new install) of Nagios Cross Platform Agent (NCPA)
 - hosts: nagios-clients
   #remote_user: root
   become: true
