@@ -17,8 +17,8 @@ Serving as Nagios clients, make sure they are grouped in inventory to "nagios-cl
 Example Playbook
 ----------------
 ---
-# Playbook that configures Nagios XI server for centralized monitoring
-#
+Playbook that configures Nagios XI server for centralized monitoring
+
 - hosts: nagios-server
   become: true
 
@@ -29,7 +29,7 @@ Example Playbook
     - xi_aide
 
 ---
-# Playbook that configures Nagios clients (either update or new install) of Nagios Cross Platform Agent (NCPA)
+Playbook that configures Nagios clients (either update or new install) of Nagios Cross Platform Agent (NCPA)
 - hosts: nagios-clients
   become: true
 
