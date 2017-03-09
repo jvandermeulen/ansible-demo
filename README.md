@@ -28,9 +28,11 @@ Example Playbook
     - xi_server_mariadb
     - xi_server_fullinstall
     - xi_aide
-
+```
+and
+```
 ---
-Playbook that configures Nagios clients (either update or new install) of Nagios Cross Platform Agent (NCPA)
+# Playbook that configures Nagios clients (either update or new install) of Nagios Cross Platform Agent (NCPA)
 - hosts: nagios-clients
   become: true
 
