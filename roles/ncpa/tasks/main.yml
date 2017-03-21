@@ -68,7 +68,7 @@
     dest: /usr/local/ncpa/etc/ncpa.cfg
     backup: true
     regexp: '^community_string =.*$'
-    replace: 'community_string = {{ ncpa_token }}'
+    replace: 'community_string = {{ ncpa_token | default("demo-token") }}'
   notify:
   - restart ncpa
 
