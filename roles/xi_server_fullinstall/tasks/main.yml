@@ -3,20 +3,20 @@
 
 - name: Get software
   get_url:
-    dest: /tmp/xi-latest.tar.gz
+    dest: "{{ tmpdir }}"/xi-latest.tar.gz
     url: https://assets.nagios.com/downloads/nagiosxi/xi-latest.tar.gz
-    force: no
+    force: no # if file exists don't download and go ahead. Normally you would need to get rid of old tarballs.
 
 - name: Unzip XI tarball
   unarchive:
-    src: /tmp/xi-latest.tar.gz
+    src: "{{ tmpdir }}"/xi-latest.tar.gz
     dest: /tmp
     remote_src: True
 
 - name: Run fullinstall script
   command: ./fullinstall -n
   args:
-    chdir: /tmp/nagiosxi
+    chdir: "{{ tmpdir }}"/nagiosxi
   register: fullinstall_out
 
 - name: Display results from fullinstall script
