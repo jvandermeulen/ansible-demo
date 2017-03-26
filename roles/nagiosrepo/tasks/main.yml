@@ -8,8 +8,16 @@
     - yum-utils
     - psmisc
 
-- name: disable one specific repo
-  command: yum-config-manager --disable nagiosxi-deps
+#A command like this is not idempotent, so we have to use the yum_repository module
+#- name: disable one specific repo
+# command: yum-config-manager --disable nagiosxi-deps
+  
+- name: delete one specific repo from repo-file
+  yum_repository: 
+    name: nagiosxi-deps
+    file: nagios-7
+    state: absent
+  
 
 #- name: Repo for Nagios
 #  copy:
