@@ -1,0 +1,29 @@
+---
+# tasks file for ncpa_win
+#
+# ansible  -i hosts win2012-01 -m win_package -a 'path=C:\\temp\\ncpa-2.0.3.exe Arguments="/S /TOKEN=demo-token" product_id={9423-23232-32555}'
+#
+# ansible  -i hosts win2012-01 -m win_firewall_rule -a "name=ncpa-ansible enable=yes state=present remoteport=5693 protocol=tcp action=allow direction=in"
+#
+# Get-WmiObject -Class Win32_Product | fl Name,Version,InstallDate,InstallSource,PackageName,IdentifyingNumber
+#
+- name: Install NCPA msi from local fs
+  win_package:
+    path: 'C:\\temp\\ncpa-2.0.3.exe'
+    arguments: '/S /TOKEN=demo-token'
+    product_id: '{9423-23232-32555}'
+  ignore_errors: true
+  register: installmsi
+  failed_when: "'was installed' not in installmsi.msg"
+ 
+
+- name: Open firewall
+  win_firewall_rule:
+    name: "ncpa-ansible"
+    enable: yes
+    state: present 
+    remoteport: 5693 
+    protocol: tcp 
+    action: allow 
+    direction: in
+    force: true

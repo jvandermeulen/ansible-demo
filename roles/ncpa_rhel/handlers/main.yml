@@ -1,0 +1,9 @@
+---
+# handlers file for ncpa_rhel
+ - name: restart ncpa
+   service: 
+     name: "{{ item }}"
+     state: restarted
+   with_items:
+     - ncpa_listener
+     - ncpa_passive
