@@ -85,7 +85,7 @@
  
  - name: Create import dir
    file:
-     path: "/usr/local/nagios/etc/import/
+     path: "/usr/local/nagios/etc/import/"
      state: directory
      owner: nagios
      mode: 0755
