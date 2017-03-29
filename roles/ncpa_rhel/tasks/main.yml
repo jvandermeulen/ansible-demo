@@ -83,13 +83,13 @@
     - hostname_selinux.sh
     - service_active.sh
  
- - name: Create import dir
-   file:
-     path: "/usr/local/nagios/etc/import/"
-     state: directory
-     owner: nagios
-     mode: 0755
-   delegate_to: 192.168.122.5
+- name: Create import dir
+  file:
+    path: "/usr/local/nagios/etc/import/"
+    state: directory
+    owner: nagios
+    mode: 0755
+  delegate_to: 192.168.122.5
 
 - name: template for nagios client hosts
   template:
