@@ -83,3 +83,20 @@
     - hostname_selinux.sh
     - service_active.sh
 
+- name: template for nagios client hosts
+  template:
+    src: ../templates/host-linuxtemplate.cfg
+    dest: "/usr/local/nagios/etc/import/host{{ inventory_hostname }}.cfg"
+    owner: nagios
+    group: nagios
+    mode: '0755'
+  delegate_to: 192.168.122.5
+
+- name: template for nagios client services
+  template:
+    src: ../templates/svc-linuxtemplate.cfg
+    dest: "/usr/local/nagios/etc/import/{{ inventory_hostname }}.cfg"
+    owner: nagios
+    group: nagios
+    mode: '0755'
+  delegate_to: 192.168.122.5

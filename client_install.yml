@@ -1,10 +1,9 @@
 ---
-# Playbook that configures Nagios clients (either update or new install) of Nagios Cross Platform Agent (NCPA)
+# Playbook that configures Nagios clients (either update or new install) with Nagios Cross Platform Agent (NCPA)
+# 
+# gather_facts: false
 - hosts: nagios-clients-linux
-  #remote_user: root
   become: true
-  #gather_facts: false
-
   roles:
     - nagiosrepo
     - ncpa_rhel
