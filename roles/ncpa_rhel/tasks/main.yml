@@ -56,12 +56,12 @@
     permanent: true
     immediate: true
 
-# de lineinfile module vervangt helaas CRLF door CRLF,LF
+# de lineinfile module vervangt helaas CRLF door CRLF,LF. Overigens is door Nagios Ent het probleem opgelost met linefeeds
 #- name:  change token (community string)
 #  lineinfile:
 #    dest: /usr/local/ncpa/etc/ncpa.cfg
 #    regexp: "^community_string ="
-#    line: "community_string = MY7tdi#7"
+#    line: "community_string = {{ ncpa_token }}"
 
 - name:  change token (community string)
   replace:
@@ -73,7 +73,7 @@
   - restart ncpa
 
 
-- name: copy several ncpa plugins
+- name: Copy several ncpa plugins
   copy:
     src: "{{ item }}"
     dest: "/usr/local/ncpa/plugins/{{ item }}"
@@ -82,6 +82,14 @@
   with_items:
     - hostname_selinux.sh
     - service_active.sh
+    
+- name: Make sure existing files are owned by Nagios # NCPA 2.x runs as nagios while NCPA 1.x runs as root
+  file:
+    path: "/usr/local/ncpa/plugins/*"
+    state: touch
+    mode: 0750
+    owner: nagios
+    group: nagios
  
 - name: Create import dir
   file:
