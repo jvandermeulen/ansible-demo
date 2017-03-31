@@ -85,8 +85,9 @@
     
 - name: Make sure existing files are owned by Nagios # NCPA 2.x runs as nagios while NCPA 1.x runs as root
   file:
-    path: "/usr/local/ncpa/plugins/*"
-    state: touch
+    path: "/usr/local/ncpa/plugins/"
+    state: directory
+    recurse: yes
     mode: 0750
     owner: nagios
     group: nagios
