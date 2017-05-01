@@ -13,7 +13,7 @@
     dest: /tmp
     remote_src: True
 
-- name: Run fullinstall script
+- name: Run fullinstall script non-interactive
   command: ./fullinstall -n
   args:
     chdir: "{{ tmpdir }}/nagiosxi"
