@@ -31,15 +31,21 @@ Example Playbook
 ```
 and
 ```
----
-# Playbook that configures Nagios clients (either update or new install) of Nagios Cross Platform Agent (NCPA)
-- hosts: nagios-clients
+----
+# Playbook that configures Nagios clients (either update or new install) with Nagios Cross Platform Agent (NCPA)
+# 
+# gather_facts: false
+- hosts: nagios-clients-linux
   become: true
-
-
   roles:
     - nagiosrepo
-    - ncpa
+    - ncpa_rhel
+
+- hosts: nagios-clients-windows
+  become: false
+  roles:
+    - ncpa_win
+
 ```
 License
 -------
