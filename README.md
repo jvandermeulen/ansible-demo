@@ -8,11 +8,11 @@ Requirements
 
 - Ansible server (preferably Ansible Tower)
 - inventory with groups called "nagios-server" and "nagios-clients"
-- Rhel 7.x server(s) minimal install with devops user accepting ssh keys attached to "nagios-server"
- 
+- Rhel 7.x server(s) minimal install with 'devops' user. ssh keys generated.
+
 Serving as Nagios clients, make sure they are grouped in inventory to "nagios-clients":
-- Windows 2012 server(s) with Powershell 3.x
-- Rhel 7.x server(s) minimal install with devops user accepting ssh keys
+- Windows 2012 server(s) with Powershell >= 3.x 
+- Rhel 7.x server(s) minimal install with 'devops' user ssh key authentication from ansible server
 
 Example Playbook
 ----------------
@@ -55,4 +55,5 @@ BSD
 Author Information
 ------------------
 
-See http://xforce.conclusion.nl/
+Jørgen van der Meulen
+See http://xforce.conclusion.nl/ 
