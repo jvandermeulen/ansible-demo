@@ -26,6 +26,14 @@
     action: allow 
     direction: in
     force: true
+    
+- name: Create import dir
+  file:
+    path: "/usr/local/nagios/etc/import/"
+    state: directory
+    owner: nagios
+    mode: 0755
+delegate_to: monitor
 
 - name: template for nagios client hosts
   template:
