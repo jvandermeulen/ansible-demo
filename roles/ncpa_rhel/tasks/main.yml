@@ -71,7 +71,7 @@
     state: directory
     owner: nagios
     mode: 0755
-  delegate_to: 192.168.122.5
+  delegate_to: nagios-server
 
 - name: template for nagios client hosts
   template:
@@ -80,7 +80,7 @@
     owner: nagios
     group: nagios
     mode: '0755'
-  delegate_to: 192.168.122.5
+  delegate_to: nagios-server
 
 - name: template for nagios client services
   template:
@@ -89,4 +89,4 @@
     owner: nagios
     group: nagios
     mode: '0755'
-  delegate_to: 192.168.122.5
+  delegate_to: nagios-server
