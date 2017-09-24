@@ -17,6 +17,7 @@
     name: nagiosxi-deps
     file: nagios-7
     state: absent
+  when: inventory_host != 'nagios=server'
   
 
 #- name: Repo for Nagios
