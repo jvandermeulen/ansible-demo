@@ -3,6 +3,8 @@
 # 
 # gather_facts: false
 - hosts: nagios-clients-linux
+  vars: 
+    update_from_version_1.x: false
   become: true
   roles:
     - nagiosrepo
