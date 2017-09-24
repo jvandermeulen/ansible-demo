@@ -34,16 +34,6 @@
     owner: nagios
     mode: 0755
   delegate_to: monitor
-
-- name: template for nagios client hosts
-  template:
-    src: ../templates/host-windowstemplate.cfg
-    dest: "/usr/local/nagios/etc/import/host{{ inventory_hostname }}.cfg"
-    owner: nagios
-    group: nagios
-    mode: '0755'
-  delegate_to: monitor
-  become: true
   
 - name: hostgroup for nagios windows hosts
   template:
@@ -55,3 +45,23 @@
   delegate_to: monitor
   become: true
   
+- name: template for nagios client hosts
+  template:
+    src: ../templates/host-windowstemplate.cfg
+    dest: "/usr/local/nagios/etc/import/host{{ inventory_hostname }}.cfg"
+    owner: nagios
+    group: nagios
+    mode: '0755'
+  delegate_to: monitor
+  become: true
+
+
+- name: template for nagios client services
+  template:
+    src: ../templates/svc-windowstemplate.cfg
+    dest: "/usr/local/nagios/etc/import/svc{{ inventory_hostname }}.cfg"
+    owner: nagios
+    group: nagios
+    mode: '0755'
+  delegate_to: monitor
+  become: true
