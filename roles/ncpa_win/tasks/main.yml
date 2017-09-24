@@ -16,7 +16,6 @@
   register: installmsi
   failed_when: "'was installed' not in installmsi.msg"
  
-
 - name: Open firewall
   win_firewall_rule:
     name: "ncpa-ansible"
@@ -27,3 +26,12 @@
     action: allow 
     direction: in
     force: true
+
+- name: template for nagios client hosts
+  template:
+    src: ../templates/host-linuxtemplate.cfg
+    dest: "/usr/local/nagios/etc/import/host{{ inventory_hostname }}.cfg"
+    owner: nagios
+    group: nagios
+    mode: '0755'
+  delegate_to: monitor
