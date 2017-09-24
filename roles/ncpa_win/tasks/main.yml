@@ -35,3 +35,13 @@
     group: nagios
     mode: '0755'
   delegate_to: monitor
+  
+ - name: hostgroup for nagios windows hosts
+  template:
+    src: ../templates/hostgroup_windows.cfg
+    dest: "/usr/local/nagios/etc/import/hostgroup_windows.cfg"
+    owner: nagios
+    group: nagios
+    mode: '0755'
+  delegate_to: monitor
+  
