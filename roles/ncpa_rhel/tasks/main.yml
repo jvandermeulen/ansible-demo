@@ -3,15 +3,11 @@
 #
 - name: special treatment for existing ncpa 1.x clients
   block:
-    - name: check for old ncpa installation
-      command: "rpm -q ncpa-1.8*"
+    - command: "rpm -q ncpa-1.8*"
       register: ncpa_old_version_exists
-      
       changed_when: "ncpa_old_version_exists.rc == 0"
       ignore_errors: true
-
-    - name:  old ncpa services should be stopped
-      service:
+    - service:
         name: "{{ item }}"
         state: stopped
         enabled: false
@@ -19,19 +15,17 @@
         - ncpa_passive
         - ncpa_listener
       when: "ncpa_old_version_exists.changed"
-
-    - name: kill old processes because of ncpa 1.8 bug
-      command: "killall -v {{ item }}"
+# kill old processes because of ncpa 1.8 bug
+    - command: "killall -v {{ item }}"
       with_items:
         - ncpa_posix_passive
         - ncpa_posix_listener
       when: "ncpa_old_version_exists.changed"
       ignore_errors: true
-
-    - name: remove old ncpa 
-      yum:
-        name: ncpa
-        state: absent
+# remove old ncpa 
+  - yum:
+      name: ncpa
+      state: absent
       when: "ncpa_old_version_exists.changed"
   when: update_from_version_1x
     
