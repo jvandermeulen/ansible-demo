@@ -1,33 +1,32 @@
 ---
 # This role depends on tasks from nagiosrepo role
 #
-- name: special treatment for existing ncpa 1.x clients
-  block:
-    - command: "rpm -q ncpa-1.8*"
-      register: ncpa_old_version_exists
-      changed_when: "ncpa_old_version_exists.rc == 0"
-      ignore_errors: true
-    - service:
-        name: "{{ item }}"
-        state: stopped
-        enabled: false
-      with_items:
-        - ncpa_passive
-        - ncpa_listener
-      when: "ncpa_old_version_exists.changed"
+block:
+  - command: "rpm -q ncpa-1.8*"
+    register: ncpa_old_version_exists
+    changed_when: "ncpa_old_version_exists.rc == 0"
+    ignore_errors: true
+  - service:
+  	name: "{{ item }}"
+	state: stopped
+	enabled: false
+    with_items:
+  	  - ncpa_passive
+	  - ncpa_listener
+    when: "ncpa_old_version_exists.changed"
 # kill old processes because of ncpa 1.8 bug
-    - command: "killall -v {{ item }}"
-      with_items:
-        - ncpa_posix_passive
-        - ncpa_posix_listener
-      when: "ncpa_old_version_exists.changed"
-      ignore_errors: true
+  - command: "killall -v {{ item }}"
+    with_items:
+	  - ncpa_posix_passive
+	  - ncpa_posix_listener
+    when: "ncpa_old_version_exists.changed"
+    ignore_errors: true
 # remove old ncpa 
-    - yum:
-        name: ncpa
-        state: absent
-        when: "ncpa_old_version_exists.changed"
-  when: update_from_version_1x
+  - yum:
+	name: ncpa
+	state: absent
+	when: "ncpa_old_version_exists.changed"
+when: update_from_version_1x  
     
 - name: install ncpa client latest
   yum:
