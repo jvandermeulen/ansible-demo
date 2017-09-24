@@ -4,7 +4,7 @@
 - name: check for old ncpa installation
   command: "rpm -q ncpa-1.8*"
   register: ncpa_old_version_exists
-  when: update_from_version_1.x
+  when: update_from_version_1x
   changed_when: "ncpa_old_version_exists.rc == 0"
   ignore_errors: true
 
