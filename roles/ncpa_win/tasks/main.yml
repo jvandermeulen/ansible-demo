@@ -43,6 +43,7 @@
     group: nagios
     mode: '0755'
   delegate_to: monitor
+  become: true
   
 # - name: hostgroup for nagios windows hosts
 #  template:
