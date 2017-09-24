@@ -23,10 +23,10 @@
       when: "ncpa_old_version_exists.changed"
       ignore_errors: true
 # remove old ncpa 
-  - yum:
-      name: ncpa
-      state: absent
-      when: "ncpa_old_version_exists.changed"
+    - yum:
+        name: ncpa
+        state: absent
+        when: "ncpa_old_version_exists.changed"
   when: update_from_version_1x
     
 - name: install ncpa client latest
