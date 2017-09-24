@@ -3,11 +3,12 @@
 #
 - hosts: nagios-server
   become: true
-  #gather_facts: false
+  
 
   roles:
     - xi_php
     - xi_server_mariadb
+    - nagiosrepo
     - xi_server_fullinstall
     - xi_aide
 
