@@ -7,6 +7,7 @@ ip="{{ xi_connect_address }}"
 admin_email="{{ xi_admin_email }}"
 admin_name="{{ xi_admin_description }}"
 admin_password="{{ xi_admin_password }}"
+admin_timezone="{{ time_zone }}"
 output_file="{{ output_file }}"
 
 # other values
@@ -20,11 +21,11 @@ success_string="You have successfully installed Nagios XI."
 echo "Setting up XI through install.php"
 
 # get the nsp we need for this session
-nsp=`curl --cookie $cookie --cookie-jar $cookie -sS "http://$ip/nagiosxi/install.php" | grep '<input type="hidden" name="nsp"' | sed 's/.*value="//;s/">//'`
+nsp=`curl --cookie $cookie --cookie-jar $cookie -sS "http://$ip/nagiosxi/install.php" | grep "var nsp_str" | awk -F\" '{print $2}'`
 
 
 # send the install parameters and get the output
-curl --cookie $cookie --cookie-jar $cookie --data "install=1&nsp=$nsp&url=$url&admin_name=$admin_name&admin_email=$admin_email&admin_username=$admin_username&admin_password=$admin_password" http://$ip/nagiosxi/install.php >$output_file 2>&1
+curl --cookie $cookie --cookie-jar $cookie --data "install=1&nsp=$nsp&url=$url&admin_name=$admin_name&admin_email=$admin_email&admin_username=$admin_username&admin_password=$admin_password&timezone=$admin_timezone"  http://$ip/nagiosxi/install.php >$output_file 2>&1
 
 # check the output for the presence of success_string and fail if not found
 if ! grep --quiet "$success_string" $output_file; then
