@@ -20,7 +20,7 @@ success_string="You have successfully installed Nagios XI."
 echo "Setting up XI through install.php"
 
 # get the nsp we need for this session
-nsp=`curl --cookie $cookie --cookie-jar $cookie -sS "http://$ip/nagiosxi/install.php" | grep "<input type='hidden' name='nsp'" | sed "s/.*value='//;s/'>//"`
+nsp=`curl --cookie $cookie --cookie-jar $cookie -sS "http://$ip/nagiosxi/install.php" | grep '<input type="hidden" name="nsp"' | sed 's/.*value="//;s/">//'`
 
 
 # send the install parameters and get the output
