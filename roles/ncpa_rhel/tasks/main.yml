@@ -29,7 +29,7 @@
     permanent: true
     immediate: true
 
-# de lineinfile module vervangt helaas CRLF door CRLF,LF. Overigens is door Nagios Ent het probleem opgelost met linefeeds
+# de lineinfile module vervangt helaas CRLF door CRLF,LF. Overigens is door Nagios Ent. het probleem opgelost met linefeeds
 #- name:  change token (community string)
 #  lineinfile:
 #    dest: /usr/local/ncpa/etc/ncpa.cfg
@@ -64,7 +64,15 @@
     mode: 0750
     owner: nagios
     group: nagios
- 
+    
+# Nagios XI is capable of reading configfiles in MariaDB.
+# The "apply config" can be automated using Nagios XI API commands, as a matter of fact creating hosts and services can
+# be created (and modified/deleted) using XI's API.
+
+# Creating config files for seperate hosts and services is definitely NOT recommended for production.
+# A better approach is:
+# Create hostgroup(s), host template(s) and "group checks"  (service checks using the hostgroup as a target)  
+
 - name: Create import dir
   file:
     path: "/usr/local/nagios/etc/import/"
@@ -72,6 +80,8 @@
     owner: nagios
     mode: 0755
   delegate_to: monitor
+  
+# See comments above section [create import dir]
 - name: template for nagios client hosts
   template:
     src: ../templates/host-linuxtemplate.cfg
@@ -81,6 +91,7 @@
     mode: 0755
   delegate_to: monitor
 
+# See comments above section [create import dir]
 - name: template for nagios client services
   template:
     src: ../templates/svc-linuxtemplate.cfg
