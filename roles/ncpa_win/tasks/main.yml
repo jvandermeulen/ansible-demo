@@ -27,6 +27,7 @@
     direction: in
     force: true
     
+# See comment below this section
 - name: Create import dir
   file:
     path: "/usr/local/nagios/etc/import/"
@@ -34,7 +35,15 @@
     owner: nagios
     mode: 0755
   delegate_to: monitor
-  
+
+# Nagios XI is capable of reading configfiles in MariaDB.
+# The "apply config" can be automated using Nagios XI API commands, as a matter of fact creating hosts and services can
+# be created (and modified/deleted) using XI's API.
+
+# Creating config files for seperate hosts and services is definitely NOT recommended for production.
+# A better approach is:
+# Create hostgroup(s), host template(s) and "group checks"  (service checks using the hostgroup as a target)  
+ 
 - name: hostgroup for nagios windows hosts
   template:
     src: ../templates/hostgroup_windows.cfg
