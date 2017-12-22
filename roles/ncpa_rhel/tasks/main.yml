@@ -28,6 +28,7 @@
     state: enabled
     permanent: true
     immediate: true
+  when: (ansible_distribution == "RedHat" and ansible_distribution_major_version > '6') or  (ansible_distribution == "CentOS" and ansible_distribution_major_version > "6")
 
 # de lineinfile module vervangt helaas CRLF door CRLF,LF. Overigens is door Nagios Ent. het probleem opgelost met linefeeds
 #- name:  change token (community string)
