@@ -4,7 +4,7 @@
     name: "{{ item }}"
     state: present
   with_items:
-    - http://repo.nagios.com/nagios/7/nagios-repo-7-2.el7.noarch.rpm
+    - http://repo.nagios.com/nagios/7/nagios-repo-7-3.el7.noarch.rpm
     - yum-utils
     - psmisc
 
