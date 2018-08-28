@@ -13,8 +13,8 @@
     arguments: '/S /TOKEN=demo-token'
     product_id: '{9423-23232-32555}'
   ignore_errors: true
-  register: installmsi
-  failed_when: "'was installed' not in installmsi.msg"
+#register: installmsi
+# failed_when: "'was installed' not in installmsi.msg"
  
 - name: Open firewall
   win_firewall_rule:
