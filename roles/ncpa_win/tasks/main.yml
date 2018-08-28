@@ -21,7 +21,7 @@
     name: NCPA_Monitoring_Client
     enabled: yes
     state: present
-    remoteip: any
+#    remoteip: any
     remoteport: 5693 
     protocol: tcp 
     action: allow 
