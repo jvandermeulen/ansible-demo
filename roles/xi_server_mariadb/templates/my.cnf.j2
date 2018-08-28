@@ -21,7 +21,7 @@ innodb_buffer_pool_size = {{ (ansible_memtotal_mb*0.5)|int }}
 innodb_log_file_size = {{ (ansible_memtotal_mb*0.125)|int }}
 innodb_log_buffer_size = 32M
 max_allowed_packet = 16M
-max_connections = 2048
+max_connections = 523
 
 [mysqld_safe]
 log-error=/var/log/mariadb/mariadb.log
