@@ -25,6 +25,7 @@
     protocol: tcp 
     action: allow 
     direction: in
+  ignore_errors: true
 #    force: true
     
 # See comment below this section
