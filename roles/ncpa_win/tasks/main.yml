@@ -7,12 +7,18 @@
 #
 # Get-WmiObject -Class Win32_Product | fl Name,Version,InstallDate,InstallSource,PackageName,IdentifyingNumber
 #
+
+- name: Get latest NCPA from nagios.org
+  win_get_url:
+    url: https://assets.nagios.com/downloads/ncpa/ncpa-latest.exe
+    dest: c:\temp\ncpa-latest.exe
+    
 - name: Install NCPA msi from local fs
   win_package:
-    path: 'C:\\temp\\ncpa-2.0.3.exe'
+    path: 'c:\temp\ncpa-latest.exe'
     arguments: '/S /TOKEN=demo-token'
     product_id: '{9423-23232-32555}'
-  ignore_errors: true
+#ignore_errors: true
 #register: installmsi
 # failed_when: "'was installed' not in installmsi.msg"
  
