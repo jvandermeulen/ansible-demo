@@ -1,7 +1,7 @@
 ---
 # This role depends on tasks from nagiosrepo role
 #
-- include: ncpa_version1.yml
+- include_tasks: ncpa_version1.yml
   when: update_from_version_1x
 
     
@@ -30,7 +30,8 @@
     immediate: true
   when: (ansible_distribution == "RedHat" and ansible_distribution_major_version > '6') or  (ansible_distribution == "CentOS" and ansible_distribution_major_version > "6")
 
-# de lineinfile module vervangt helaas CRLF door CRLF,LF. Overigens is door Nagios Ent. het probleem opgelost met linefeeds
+# NCPA version 2.0.3 used to have CRLF  chars in ncpa.cfg. Using the lineinfile module those CRLF were replaced byCRLF,LF. 
+# Nagios Enterprises fixed the linefeeds problem in newer versions of NCPA
 #- name:  change token (community string)
 #  lineinfile:
 #    dest: /usr/local/ncpa/etc/ncpa.cfg
@@ -66,9 +67,9 @@
     owner: nagios
     group: nagios
     
-# Nagios XI is capable of reading configfiles in MariaDB.
-# The "apply config" can be automated using Nagios XI API commands, as a matter of fact creating hosts and services can
-# be created (and modified/deleted) using XI's API.
+# Nagios XI is capable of importing configfiles in MariaDB.
+# The "apply config" can be automated using Nagios XI API commands
+# Recommended: hosts and services can be created (and modified/deleted) using XI's API instead of importing flat files.
 
 # Creating config files for seperate hosts and services is definitely NOT recommended for production.
 # A better approach is:
@@ -82,7 +83,7 @@
     mode: 0755
   delegate_to: monitor
   
-# See comments above section [create import dir]
+# See comments above task [create import dir]
 - name: template for nagios client hosts
   template:
     src: ../templates/host-linuxtemplate.cfg
@@ -92,7 +93,7 @@
     mode: 0755
   delegate_to: monitor
 
-# See comments above section [create import dir]
+# See comments above task [create import dir]
 - name: template for nagios client services
   template:
     src: ../templates/svc-linuxtemplate.cfg
