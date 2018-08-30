@@ -4,28 +4,18 @@
     name: "{{ item }}"
     state: present
   with_items:
-    - http://repo.nagios.com/nagios/7/nagios-repo-7-3.el7.noarch.rpm
+    - http://repo.nagios.com/nagios/{{ ansible_distribution_major_version }}/nagios-repo-{{ ansible_distribution_major_version }}-3.el{{ ansible_distribution_major_version }}.noarch.rpm
     - yum-utils
     - psmisc
 
-#A command like this is not idempotent, so we have to use the yum_repository module
-#- name: disable one specific repo
-# command: yum-config-manager --disable nagiosxi-deps
+# Goal: Disable nagiosxi-deps repo from repo-file
+# Possible command: yum-config-manager --disable nagiosxi-deps
+# Note: A command like this is not idempotent, so we have to use the yum_repository module
   
-- name: delete one specific repo from repo-file
+- name: Disable nagiosxi-deps repo from repo-file
   yum_repository: 
     name: nagiosxi-deps
-    file: nagios-7
+    file: nagios-{{ ansible_distribution_major_version }}
     state: absent
   when: not inventory_hostname == 'monitor'
-  
-
-#- name: Repo for Nagios
-#  copy:
-#    src: 'nagios-7.repo'
-#    dest: '/etc/yum.repos.d/'
-#    owner: root
-#    mode: '644'
-
-
   
