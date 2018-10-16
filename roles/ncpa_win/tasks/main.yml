@@ -1,9 +1,7 @@
 ---
 # tasks file for ncpa_win
 #
-# ansible  -i hosts win2012-01 -m win_package -a 'path=C:\\temp\\ncpa-2.0.3.exe Arguments="/S /TOKEN=demo-token" product_id={9423-23232-32555}'
-#
-# ansible  -i hosts win2012-01 -m win_firewall_rule -a "name=ncpa-ansible enable=yes state=present remoteport=5693 protocol=tcp action=allow direction=in"
+# ansible -i /etc/ansible/hosts nagios-clients-windows -m win_file_version -a 'path="c:/program files (x86)/nagios/ncpa/ncpa_listener.exe"'
 #
 # Get-WmiObject -Class Win32_Product | fl Name,Version,InstallDate,InstallSource,PackageName,IdentifyingNumber
 #
