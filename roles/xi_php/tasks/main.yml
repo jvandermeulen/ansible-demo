@@ -3,9 +3,10 @@
 #
 - name: Install Apache and PHP
   yum: 
-    name: "{{ item }}" 
+    name: "{{ variouswebpackages }}"
     state: latest
-  with_items:
+  var:
+    variouswebpackages:
     - httpd
     - php
     - php-devel
