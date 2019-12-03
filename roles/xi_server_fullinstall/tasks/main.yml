@@ -1,8 +1,19 @@
 ---
 # tasks file for xi_server_fullinstall
 
-# Nagios XI can be installed using a tarball or using RPM's (see http://repo.nagios.com/)... however RPM's are released two weeks after tarball releases.
 
+- name: Install Apache and PHP
+  yum: 
+    name: "{{ requiredpackages }}"
+    state: latest
+  vars:
+    requiredpackages:
+    - gcc-c++
+    - mlocate
+    - bind-utils
+    
+# Nagios XI can be installed using a tarball or using RPM's (see http://repo.nagios.com/)... however RPM's are released two weeks after tarball releases.
+ 
 - name: Get software
   get_url:
     dest: "{{ tmpdir }}/xi-latest.tar.gz"
