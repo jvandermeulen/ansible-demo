@@ -1,0 +1,34 @@
+---
+- name: version
+  hosts: cisco
+  gather_facts: yes
+  become: yes
+  tasks:
+    - name: run show version on remote Cisco IOS devices
+      cisco.iosxr.iosxr_command:
+        commands: show version | i Uptime
+        wait_for: result[0] contains Uptime
+      register: shvers
+
+#    - name: IOS facts
+#      ios_facts
+
+    - name: run show version on remote devices
+      debug:
+        msg: " Uptime for {{ inventory_hostname }} {{ ansible_net_system }} is \t{{ shvers.stdout_lines }}"
+
+
+- name: version
+  hosts: arista
+  gather_facts: yes
+  become: yes
+  tasks:
+    - name: run show version on remote Arista devices
+      arista.eos.eos_command:
+        commands: show version  | i Uptime
+        wait_for: result[0] contains Uptime
+      register: shvers
+
+    - name: run show version on remote devices
+      debug:
+        msg: " Uptime for {{ inventory_hostname }} {{ ansible_net_system }} is \t{{ shvers.stdout_lines }}"
